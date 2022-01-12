@@ -34,6 +34,17 @@ class ViewController: UIViewController {
         /* slider는 Float 타입, 라벨텍스트는 String타입, 이 둘을 변환해도 되지만 보기 좋게 하기 위해 Int형으로 변환하고
          그 후에 Int형을 String으로 변환하는 선택을 한 것임. */
     }
+    
+    func showAlert(message: String) {
+        
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default){
+            (action) in self.reset()
+        }
+        
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
 
     @IBAction func touchUpHitButton(_ sender: UIButton) {
         print(slider.value)
@@ -44,11 +55,13 @@ class ViewController: UIViewController {
         tryCountLable.text = "\(tryCount) / 5"
         
         if randomValue == hitValue {
-            print("YOU HIT!")
+            // print("YOU HIT!")
+            showAlert(message: "YOU HIT!")
             reset()
             return // return을 통해 5번째 맞출 때 HIT과 LOSE가 같이 출력되는 문제를 해결
         } else if tryCount >= 5 {
-            print("YOU LOSE...")
+            //print("YOU LOSE...")
+            showAlert(message: "YOU LOSE...")
             reset()
             return
         } else if randomValue > hitValue {
